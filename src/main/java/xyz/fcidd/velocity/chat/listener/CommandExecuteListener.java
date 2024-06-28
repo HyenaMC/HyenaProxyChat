@@ -52,13 +52,16 @@ public class CommandExecuteListener {
 		if (rootCommand.equals("execute")) return;
 
 		if (CharacterUtils.equalsAny(rootCommand, Commands.TELEPORT)) {
+			if (!CONFIG.isEnableCommandTp()) {
+				return;
+			}
 			if (size == 2) { // /tp <target>
 				// 跨服tp
 				if (PLAYER_UTIL.tpWithServerSwitch(sourcePlayer, command.get(1))) {
 					event.setResult(denied());
 				}
 			} else if (size == 3 // /tp <source> <target>
-				&& command.get(size - 2).equals(sourcePlayer.getUsername())) {
+					   && command.get(size - 2).equals(sourcePlayer.getUsername())) {
 				// 跨服tp
 				if (PLAYER_UTIL.tpWithServerSwitch(sourcePlayer, command.get(2))) {
 					event.setResult(denied());

@@ -52,6 +52,11 @@ public class VelocityChatConfig extends AnnotationConfig {
 	private boolean showGlobalTabList = false;
 	@Getter
 	@ConfigKey(comment = """
+		是否启用跨服TP
+		Enable cross-server teleport.""")
+	private boolean enableCommandTp = false;
+	@Getter
+	@ConfigKey(comment = """
 		是否对所有玩家启用“/glist”指令
 		enable command `glist`.""")
 	private boolean enableCommandGlist = true;
