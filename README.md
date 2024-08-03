@@ -15,7 +15,7 @@
 
 - 跨服聊天
     - （可配置，默认开启）聊天消息支持彩色文字
-      。彩色文字可参照[此链接](https://minecraft.fandom.com/zh/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%BB%A3%E7%A0%81)
+      。彩色文字可参照[此链接](https://zh.minecraft.wiki/w/%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%BB%A3%E7%A0%81)
       ，在游戏中使用 `&`符号代替 `§`
     - `/vchat local` 像本地服务器发送聊天消息，别名（可配置）`/br`
     - `/vchat broadcast` 发送全局聊天消息，别名（可配置）`/lc`
