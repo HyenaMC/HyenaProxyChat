@@ -9,7 +9,7 @@ A Cross-server chat plugin for Velocity proxy
 
 - Cross-server chat
     - (configurable, default true) Enable color code
-      . check [Minecraft Wiki](https://minecraft.fandom.com/wiki/Formatting_codes) for
+      . check [Minecraft Wiki](https://minecraft.wiki/w/Formatting_codes) for
       more information
       , use `&` instead of `§` in game.
     - `/vchat local` Send local message (to current server), alias (configurable) `/br`.
