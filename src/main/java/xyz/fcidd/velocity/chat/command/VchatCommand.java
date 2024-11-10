@@ -11,7 +11,7 @@ import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.proxy.ConsoleCommandSource;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ServerConnection;
-import fun.qu_an.lib.minecraft.vanilla.util.FormatUtils;
+import fun.qu_an.lib.mc.util.FormatUtils;
 import net.kyori.adventure.text.Component;
 import org.slf4j.Logger;
 import xyz.fcidd.velocity.chat.VelocityChatPlugin;

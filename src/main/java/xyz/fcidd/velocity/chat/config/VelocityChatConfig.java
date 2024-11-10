@@ -1,8 +1,8 @@
 package xyz.fcidd.velocity.chat.config;
 
 import com.electronwill.nightconfig.core.Config;
-import fun.qu_an.lib.basic.config.AnnotationConfig;
-import fun.qu_an.lib.basic.config.ConfigKey;
+import fun.qu_an.lib.config.AnnotationConfig;
+import fun.qu_an.lib.config.ConfigKey;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 

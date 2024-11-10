@@ -3,7 +3,7 @@ package xyz.fcidd.velocity.chat.listener;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.command.CommandExecuteEvent;
 import com.velocitypowered.api.proxy.Player;
-import fun.qu_an.lib.basic.util.CharacterUtils;
+import fun.qu_an.lib.util.CharacterUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import org.jetbrains.annotations.NotNull;

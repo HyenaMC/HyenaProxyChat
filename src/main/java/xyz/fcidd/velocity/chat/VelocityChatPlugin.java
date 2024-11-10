@@ -9,7 +9,7 @@ import com.velocitypowered.api.event.proxy.ProxyReloadEvent;
 import com.velocitypowered.api.permission.Tristate;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
-import fun.qu_an.lib.minecraft.velocity.api.language.LanguageManager;
+import fun.qu_an.lib.velocity.api.language.LanguageManager;
 import lombok.Getter;
 import org.slf4j.Logger;
 import xyz.fcidd.velocity.chat.command.VchatCommand;
