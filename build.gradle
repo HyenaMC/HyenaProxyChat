@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'eclipse'
     id "org.jetbrains.gradle.plugin.idea-ext" version "1.0.1"
+    id("xyz.jpenilla.run-velocity") version "2.3.1"
 }
 
 group = properties.get('plugin_group')
@@ -13,11 +14,17 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven {
-        url 'file:/G:/qu-an/Dev/Maven/repo'
-    }
-    maven {
         name = 'papermc-repo'
         url = 'https://repo.papermc.io/repository/maven-public/'
+    }
+}
+
+tasks {
+    runVelocity {
+        // Configure the Velocity version for our task.
+        // This is the only required configuration besides applying the plugin.
+        // Your plugin's jar (or shadowJar if present) will be used automatically.
+        velocityVersion("3.4.0-SNAPSHOT")
     }
 }
 
