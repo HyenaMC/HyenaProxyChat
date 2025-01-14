@@ -108,7 +108,7 @@ final class LanguageManagerImpl implements LanguageManager {
 			existLang.load(existIs);
 		}
 		Set<String> keys = this.keys;
-		existLang.keySet().forEach(k -> keys.add(k.toString())); // 缓存
+		existLang.keySet().forEach(k -> keys.add(new String(k.toString().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8))); // 缓存
 		// 写入新键值到tmp
 		BufferedWriter writer = null;
 		try {

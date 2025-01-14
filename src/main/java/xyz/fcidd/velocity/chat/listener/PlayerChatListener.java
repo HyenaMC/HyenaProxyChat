@@ -49,16 +49,16 @@ public class PlayerChatListener {
 		List<String> mcdrCommandPrefixes = CONFIG.getMcdrCommandPrefix();
 		if (!mcdrCommandPrefixes.isEmpty()
 			&& CharacterUtils.startsWithAny(playerMessage, mcdrCommandPrefixes)) {
-			if (CONFIG.isLogPlayerCommand()) {
-				logger.info("[mcdr][{}]<{}> {}", serverId, playerName, playerMessage);
-			}
 			return;
 		}
 
-		// 取消消息发送！
-		event.setResult(denied());
-
-		// 发送全局消息！
-		Utils.sendGlobalPlayerChat(player, playerMessage, currentServer, serverId);
+		if (CONFIG.isTakeOverLocalChatsWhenGlobalChats()) {
+			// 取消消息发送！
+			event.setResult(denied());
+			Utils.sendGlobalPlayerChat(player, playerMessage, currentServer, serverId);
+		} else {
+			// 发送全局消息！
+			Utils.assembleAndComsume(player, playerMessage, currentServer, serverId, Utils::sendToAllPlayers);
+		}
 	}
 }

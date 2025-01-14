@@ -37,11 +37,6 @@ public class VelocityChatConfig extends AnnotationConfig {
 	private boolean takeOverLocalChatsWhenGlobalChats = false;
 	@Getter
 	@ConfigKey(comment = """
-		是否打印玩家命令日志
-		Log player commands.""")
-	private boolean logPlayerCommand = true;
-	@Getter
-	@ConfigKey(comment = """
 		是否在ping时发送玩家列表（在客户端服务器列表显示玩家列表）
 		Send sample players when client refreshing multiplayer games.""")
 	private boolean sendPlayersOnPing = false;

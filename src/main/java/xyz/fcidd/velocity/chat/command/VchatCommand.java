@@ -111,6 +111,7 @@ public class VchatCommand {
 			return 0;
 		}
 		player.spoofChatInput(message);
+		VelocityChatPlugin.getLogger().info("[local:{}]<{}> {}", currentServer.get().getServerInfo().getName(), player.getUsername(), message);
 		return 1;
 	}
 
@@ -123,7 +124,7 @@ public class VchatCommand {
 		if (source instanceof Player player) {
 			Utils.sendGlobalPlayerChat(player, message);
 		} else if (source instanceof ConsoleCommandSource) {
-			PROXY_SERVER.sendMessage(Component.text("§4[Proxy] §r").append(Component.text(message)));
+			Utils.sendToAllPlayers(Component.text("§4[Proxy] §r").append(Component.text(message)));
 		}
 		return 1;
 	}

@@ -64,7 +64,7 @@ public class VelocityChatPlugin {
 		// 玩家ping
 		eventManager.register(this, new ProxyPingListener());
 
-		logger.info("§a" + PLUGIN_NAME + " v" + VERSION + " loaded!");
+//		logger.info("<green>" + PLUGIN_NAME + " v" + VERSION + " loaded!");
 	}
 
 	@Subscribe

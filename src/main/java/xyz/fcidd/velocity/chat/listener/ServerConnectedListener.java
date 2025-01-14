@@ -10,10 +10,10 @@ import xyz.fcidd.velocity.chat.config.VelocityChatConfig;
 import xyz.fcidd.velocity.chat.text.Translates;
 import xyz.fcidd.velocity.chat.util.ComponentUtils;
 import xyz.fcidd.velocity.chat.util.TabListUtils;
+import xyz.fcidd.velocity.chat.util.Utils;
 
 import java.util.concurrent.TimeUnit;
 
-import static xyz.fcidd.velocity.chat.util.Utils.PROXY_SERVER;
 import static xyz.fcidd.velocity.chat.util.Utils.TASK_UTIL;
 
 public class ServerConnectedListener {
@@ -29,14 +29,14 @@ public class ServerConnectedListener {
 		event.getPreviousServer().ifPresentOrElse(
 			server -> {
 				// 发送服务器切换消息
-				PROXY_SERVER.sendMessage(Translates.SERVER_SWITCH.args(
+				Utils.sendToAllPlayers(Translates.SERVER_SWITCH.args(
 					playerNameComponent,
 					ComponentUtils.getServerComponent(server),
 					targetServerComponent)
 				);
 			}, () -> {
 				// 发送服务器连接消息
-				PROXY_SERVER.sendMessage(Translates.CONNECTED.args(
+				Utils.sendToAllPlayers(Translates.CONNECTED.args(
 					playerNameComponent,
 					targetServerComponent
 				));
