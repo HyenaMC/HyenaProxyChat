@@ -49,6 +49,9 @@ public class PlayerChatListener {
 		List<String> mcdrCommandPrefixes = CONFIG.getMcdrCommandPrefix();
 		if (!mcdrCommandPrefixes.isEmpty()
 			&& CharacterUtils.startsWithAny(playerMessage, mcdrCommandPrefixes)) {
+			if (CONFIG.isLogPlayerCommand()) {
+				logger.info("[mcdr][{}]<{}> {}", serverId, playerName, playerMessage);
+			}
 			return;
 		}
 
@@ -58,7 +61,9 @@ public class PlayerChatListener {
 			Utils.sendGlobalPlayerChat(player, playerMessage, currentServer, serverId);
 		} else {
 			// 发送全局消息！
-			Utils.assembleAndComsume(player, playerMessage, currentServer, serverId, Utils::sendToAllPlayers);
+			Utils.assembleAndComsume(player, playerMessage, currentServer, serverId, text -> {
+				Utils.sendToAllPlayers(text);
+			});
 		}
 	}
 }

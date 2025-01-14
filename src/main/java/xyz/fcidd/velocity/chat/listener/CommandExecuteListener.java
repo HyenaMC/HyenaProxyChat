@@ -29,6 +29,20 @@ public class CommandExecuteListener {
 			return;
 		}
 
+		// 打印
+		if (CONFIG.isLogPlayerCommand()) {
+			sourcePlayer.getCurrentServer().ifPresentOrElse(
+				server -> logger.info(
+					"[command][{}]<{}> /{}",
+					server.getServer().getServerInfo().getName(),
+					sourcePlayer.getUsername(),
+					event.getCommand()),
+				() -> logger.info(
+					"[command][]<{}> /{}",
+					sourcePlayer.getUsername(),
+					event.getCommand()));
+		}
+
 		// 接管一些指令
 
 		List<String> command = List.of(event.getCommand().split(" "));
