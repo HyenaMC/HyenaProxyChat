@@ -48,6 +48,7 @@ public class Translates {
 
 	// 服务器名
 
+	public static final TranslatableComponent SERVER_TAB_LIST = Component.translatable("qu_an.chat.server.tab_list");
 	public static final String SERVER_NAME = "qu_an.chat.server.name.";
 
 	public static final LanguageManager DEFAULT_LANG = LanguageManager.create(

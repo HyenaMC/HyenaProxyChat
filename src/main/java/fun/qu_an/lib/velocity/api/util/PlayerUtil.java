@@ -207,7 +207,7 @@ public final class PlayerUtil {
 			// 设置新权限函数
 			event.setProvider(subject -> permission -> {
 				Predicate<Player> p = permissions.get(permission);
-				if (p == null) { // 新函数继承原函数
+				if (p == null) { // 新函数继承原函数，并不会套娃，每次的原函数都是新创建的
 					return function.getPermissionValue(permission);
 				}
 				return Tristate.fromBoolean(p.test(player));

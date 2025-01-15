@@ -42,7 +42,7 @@ public class ServerConnectedListener {
 				));
 			});
 		if (VelocityChatConfig.CONFIG.isShowGlobalTabList()) {
-			TASK_UTIL.delay(1, TimeUnit.SECONDS, TabListUtils::refresh);
+			TASK_UTIL.delay(2, TimeUnit.SECONDS, TabListUtils::refresh);
 		}
 	}
 }

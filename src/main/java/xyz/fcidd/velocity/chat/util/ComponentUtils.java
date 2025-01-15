@@ -61,13 +61,7 @@ public class ComponentUtils {
 		}
 		playerCountComponent = playerCountComponent.args(Component.text(onlinePlayers));
 
-		String serverTranslationKey = Translates.SERVER_NAME + serverId;
-		Component serverComponent;
-		if (Utils.hasTranslation(serverTranslationKey)) {
-			serverComponent = Component.translatable(serverTranslationKey);
-		} else {
-			serverComponent = Component.text(serverId);
-		}
+		Component serverComponent = getNonEventedServerComponent(serverId);
 
 		if (serverId.equals(currentServerId)) {
 			return serverComponent
@@ -84,6 +78,15 @@ public class ComponentUtils {
 							.translatable("velocity.command.server-tooltip-offer-connect-server")
 							.append(Component.newline())
 							.append(playerCountComponent)));
+		}
+	}
+
+	public static @NotNull Component getNonEventedServerComponent(String serverId) {
+		String serverTranslationKey = Translates.SERVER_NAME + serverId;
+		if (Utils.hasTranslation(serverTranslationKey)) {
+			return Component.translatable(serverTranslationKey);
+		} else {
+			return Component.text(serverId);
 		}
 	}
 

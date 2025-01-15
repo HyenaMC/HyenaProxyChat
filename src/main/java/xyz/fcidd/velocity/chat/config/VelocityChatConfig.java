@@ -48,7 +48,10 @@ public class VelocityChatConfig extends AnnotationConfig {
 	@Getter
 	@ConfigKey(comment = """
 		Tab列表是否显示全部群组玩家
-		Show all proxy players on tab list.""")
+		已过时，将要移除
+		无法在没有bug的要求下简单实现
+		Show all proxy players on tab list.
+		Deprecated, for removal.""")
 	private boolean showGlobalTabList = false;
 	@Getter
 	@ConfigKey(comment = """
