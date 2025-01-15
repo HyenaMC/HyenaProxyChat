@@ -17,6 +17,7 @@ import java.util.Optional;
 
 import static com.velocitypowered.api.event.player.PlayerChatEvent.ChatResult.denied;
 import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
+import static xyz.fcidd.velocity.chat.util.Utils.PROXY_SERVER;
 
 public class PlayerChatListener {
 	private static final Logger logger = VelocityChatPlugin.getLogger();
@@ -39,10 +40,12 @@ public class PlayerChatListener {
 		// 获取服务器ID
 		Optional<ServerConnection> currentServerOptional = player.getCurrentServer();
 		RegisteredServer currentServer = null;
-		String serverId = "";
+		String serverId;
 		if (currentServerOptional.isPresent()) {
 			currentServer = currentServerOptional.get().getServer();
 			serverId = currentServer.getServerInfo().getName();
+		} else {
+			serverId = "";
 		}
 
 		// 如果是MCDR命令直接返回
@@ -55,15 +58,20 @@ public class PlayerChatListener {
 			return;
 		}
 
-		if (CONFIG.isTakeOverLocalChatsWhenGlobalChats()) {
+		if (CONFIG.isOverwriteLocalChat()) {
 			// 取消消息发送！
 			event.setResult(denied());
 			Utils.sendGlobalPlayerChat(player, playerMessage, currentServer, serverId);
 		} else {
 			// 发送全局消息！
-			Utils.assembleAndComsume(player, playerMessage, currentServer, serverId, text -> {
-				Utils.sendToAllPlayers(text);
-			});
+			Utils.assembleAndComsume(player, playerMessage, currentServer, serverId,
+				text -> PROXY_SERVER.getAllServers().forEach(server -> {
+					if (server.getServerInfo().getName().equals(serverId)) {
+						return;
+					}
+					server.sendMessage(text);
+				}));
+			logger.info("[global:{}]<{}> {}", serverId, playerName, playerMessage);
 		}
 	}
 }

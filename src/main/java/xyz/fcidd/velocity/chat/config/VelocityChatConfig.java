@@ -34,7 +34,7 @@ public class VelocityChatConfig extends AnnotationConfig {
 		全局聊天时是否接管本地聊天
 		Whether to take over local chats when global chats.
 		""")
-	private boolean takeOverLocalChatsWhenGlobalChats = false;
+	private boolean overwriteLocalChat = false;
 	@Getter
 	@ConfigKey(comment = """
 		是否打印玩家命令日志

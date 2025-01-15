@@ -38,9 +38,9 @@ public class Utils {
 	}
 
 	public static void sendToAllPlayers(@NotNull Component text, String log, Object... args) {
-		PROXY_SERVER.sendMessage(text);
-//		PROXY_SERVER.getAllServers().forEach(server -> server.sendMessage(text));
-//		if (log != null) VelocityChatPlugin.getLogger().info(log, args);
+//		PROXY_SERVER.sendMessage(text);
+		PROXY_SERVER.getAllServers().forEach(server -> server.sendMessage(text));
+		if (log != null) VelocityChatPlugin.getLogger().info(log, args);
 	}
 
 	public static void assembleAndComsume(Player player, String playerMessage, RegisteredServer currentServer, String serverId, Consumer<Component> consumer) {
