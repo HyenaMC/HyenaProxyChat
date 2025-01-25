@@ -39,19 +39,22 @@ public class ComponentUtils {
 	}
 
 	public static @NotNull Component getServerComponent(@Nullable RegisteredServer server) {
-		if(server == null) return Component.empty();
-		return getServerComponent0(server, null);
+		return getServerComponent0(server, 0, null);
 	}
 
-	public static @NotNull Component getServerComponent(@Nullable RegisteredServer server, @NotNull String currentServerId){
-		if(server == null) return Component.empty();
-		return getServerComponent0(server, currentServerId);
+	public static @NotNull Component getServerComponent(@Nullable RegisteredServer server, int playerCountOffset) {
+		return getServerComponent0(server, playerCountOffset, null);
 	}
 
-	private static @NotNull Component getServerComponent0(@NotNull RegisteredServer server, String currentServerId) {
+	public static @NotNull Component getServerComponent(@Nullable RegisteredServer server, int playerCountOffset, @NotNull String currentServerId) {
+		if(server == null) return Component.empty();
+		return getServerComponent0(server, playerCountOffset, currentServerId);
+	}
+
+	private static @NotNull Component getServerComponent0(@NotNull RegisteredServer server, int playerCountOffset, String currentServerId) {
 		String serverId = server.getServerInfo().getName();
 
-		int onlinePlayers = server.getPlayersConnected().size();
+		int onlinePlayers = server.getPlayersConnected().size() + playerCountOffset;
 
 		TranslatableComponent playerCountComponent;
 		if (onlinePlayers == 1) {

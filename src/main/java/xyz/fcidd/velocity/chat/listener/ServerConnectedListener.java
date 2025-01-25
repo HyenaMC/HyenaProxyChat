@@ -22,7 +22,7 @@ public class ServerConnectedListener {
 		Player player = event.getPlayer();
 		RegisteredServer targetServer = event.getServer();
 		// 获取目标服务器消息组件
-		Component targetServerComponent = ComponentUtils.getServerComponent(targetServer);
+		Component targetServerComponent = ComponentUtils.getServerComponent(targetServer, +1);
 		// 玩家名
 		Component playerNameComponent = ComponentUtils.getPlayerComponent(player);
 		// 判断是否刚刚连接至服务器（是否没有来源服务器）
