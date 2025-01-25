@@ -39,7 +39,7 @@ public class Utils {
 
 	public static void sendToAllPlayers(@NotNull Component text, String log, Object... args) {
 //		PROXY_SERVER.sendMessage(text);
-		PROXY_SERVER.getAllServers().forEach(server -> server.sendMessage(text));
+		PROXY_SERVER.getAllPlayers().forEach(player -> player.sendMessage(text));
 		if (log != null) VelocityChatPlugin.getLogger().info(log, args);
 	}
 

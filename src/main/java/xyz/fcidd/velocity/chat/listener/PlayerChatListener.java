@@ -52,7 +52,7 @@ public class PlayerChatListener {
 		List<String> mcdrCommandPrefixes = CONFIG.getMcdrCommandPrefix();
 		if (!mcdrCommandPrefixes.isEmpty()
 			&& CharacterUtils.startsWithAny(playerMessage, mcdrCommandPrefixes)) {
-			if (CONFIG.isLogPlayerCommand()) {
+			if (CONFIG.isLogMcdrCommands()) {
 				logger.info("[mcdr][{}]<{}> {}", serverId, playerName, playerMessage);
 			}
 			return;

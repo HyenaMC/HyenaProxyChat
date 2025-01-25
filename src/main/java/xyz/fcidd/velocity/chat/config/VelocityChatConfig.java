@@ -37,9 +37,9 @@ public class VelocityChatConfig extends AnnotationConfig {
 	private boolean overwriteLocalChat = false;
 	@Getter
 	@ConfigKey(comment = """
-		是否打印玩家命令日志
-		Log player commands.""")
-	private boolean logPlayerCommand = true;
+		是否打印MCDR命令日志
+		Log MCDR commands.""")
+	private boolean logMcdrCommands = true;
 	@Getter
 	@ConfigKey(comment = """
 		是否在ping时发送玩家列表（在客户端服务器列表显示玩家列表）

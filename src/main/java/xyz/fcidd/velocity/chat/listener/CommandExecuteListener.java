@@ -7,8 +7,6 @@ import fun.qu_an.lib.util.CharacterUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import xyz.fcidd.velocity.chat.VelocityChatPlugin;
 import xyz.fcidd.velocity.chat.command.Commands;
 import xyz.fcidd.velocity.chat.text.Translates;
 import xyz.fcidd.velocity.chat.util.ComponentUtils;
@@ -20,8 +18,6 @@ import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
 import static xyz.fcidd.velocity.chat.util.Utils.PLAYER_UTIL;
 
 public class CommandExecuteListener {
-	private static final Logger logger = VelocityChatPlugin.getLogger();
-
 	@Subscribe
 	public void onCommandExecute(@NotNull CommandExecuteEvent event) {
 		if (!event.getResult().isAllowed()
@@ -30,18 +26,18 @@ public class CommandExecuteListener {
 		}
 
 		// 打印
-		if (CONFIG.isLogPlayerCommand()) {
-			sourcePlayer.getCurrentServer().ifPresentOrElse(
-				server -> logger.info(
-					"[command][{}]<{}> /{}",
-					server.getServer().getServerInfo().getName(),
-					sourcePlayer.getUsername(),
-					event.getCommand()),
-				() -> logger.info(
-					"[command][]<{}> /{}",
-					sourcePlayer.getUsername(),
-					event.getCommand()));
-		}
+//		if (CONFIG.isLogMcdrCommand()) {
+//			sourcePlayer.getCurrentServer().ifPresentOrElse(
+//				server -> logger.info(
+//					"[command][{}]<{}> /{}",
+//					server.getServer().getServerInfo().getName(),
+//					sourcePlayer.getUsername(),
+//					event.getCommand()),
+//				() -> logger.info(
+//					"[command][]<{}> /{}",
+//					sourcePlayer.getUsername(),
+//					event.getCommand()));
+//		}
 
 		// 接管一些指令
 

@@ -12,8 +12,8 @@ A Cross-server chat plugin for Velocity proxy
       . check [Minecraft Wiki](https://minecraft.wiki/w/Formatting_codes) for
       more information
       , use `&` instead of `§` in game.
-    - `/vchat local` Send local message (to current server), alias (configurable) `/br`.
-    - `/vchat broadcast` Send global message, alias (configurable) `/lc`.
+  - `/vchat local` Send local message (to current server), alias (configurable) `/lc`.
+  - `/vchat broadcast` Send global message, alias (configurable) `/br`.
 - Message of player joined, left and switch server.
 - (configurable, default false) Send sample players when client refreshing multiplayer games.
 - (configurable, default false) Show all proxy players on tab list.

@@ -16,6 +16,9 @@ import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
 public class DisconnectListener {
 	@Subscribe
 	public void onPlayerDisconnect(@NotNull DisconnectEvent event) {
+		if (event.getLoginStatus() != DisconnectEvent.LoginStatus.SUCCESSFUL_LOGIN) {
+			return;
+		}
 		Player player = event.getPlayer();
 		// 玩家名
 		Component playerNameComponent = ComponentUtils.getPlayerComponent(player);
