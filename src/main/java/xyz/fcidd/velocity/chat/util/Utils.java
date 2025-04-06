@@ -8,6 +8,7 @@ import fun.qu_an.lib.velocity.api.util.TaskUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import xyz.fcidd.velocity.chat.VelocityChatPlugin;
 import xyz.fcidd.velocity.chat.text.Translates;
 
@@ -18,7 +19,7 @@ public class Utils {
 	public static final PlayerUtil PLAYER_UTIL = PlayerUtil.create(PROXY_SERVER, VelocityChatPlugin.getInstance());
 	public static final TaskUtil TASK_UTIL = TaskUtil.create(VelocityChatPlugin.getInstance(), PROXY_SERVER);
 
-	public static boolean hasTranslation(String key) {
+	public static boolean hasCustomTranslation(String key) {
 		return Translates.CUSTOM_LANG.contains(key);
 	}
 
@@ -29,7 +30,7 @@ public class Utils {
 	}
 
 	public static void sendGlobalPlayerChat(Player player, String playerMessage, RegisteredServer currentServer, String serverId) {
-		assembleAndComsume(player, playerMessage, currentServer, serverId,
+		assembleAndConsume(player, playerMessage, currentServer, serverId,
 			message -> sendToAllPlayers(message, "[global:{}]<{}> {}", serverId, player.getUsername(), playerMessage));
 	}
 
@@ -43,15 +44,19 @@ public class Utils {
 		if (log != null) VelocityChatPlugin.getLogger().info(log, args);
 	}
 
-	public static void assembleAndComsume(Player player, String playerMessage, RegisteredServer currentServer, String serverId, Consumer<Component> consumer) {
+	public static void assembleAndConsume(Player player,
+										  String playerMessage,
+										  @Nullable RegisteredServer currentServer,
+										  String serverId,
+										  Consumer<Component> globalConsumer) {
 		// 玩家名
 		Component playerNameComponent = ComponentUtils.getPlayerComponent(player);
 		// 构建玩家消息，Velocity API 居然把玩家队伍颜色阻断掉了，导致不能显示玩家队伍颜色
 		TextComponent chatMessage = Component.text(playerMessage);
 		// 发送消息
 		String serverChatFormatTranslationKey = Translates.SERVER_CHAT + serverId;
-		if (hasTranslation(serverChatFormatTranslationKey)) {
-			consumer.accept(Component.translatable(
+		if (hasCustomTranslation(serverChatFormatTranslationKey)) {
+			globalConsumer.accept(Component.translatable(
 				serverChatFormatTranslationKey, // 追加子服务器id
 				Translates.PROXY_NAME, // 群组名称
 				ComponentUtils.getServerComponent(currentServer), // 服务器名称
@@ -59,7 +64,54 @@ public class Utils {
 				chatMessage // 聊天内容
 			));
 		} else {
-			consumer.accept(Translates.DEFAULT_CHAT.args(
+			globalConsumer.accept(Translates.DEFAULT_CHAT.args(
+				Translates.PROXY_NAME, // 群组名称
+				ComponentUtils.getServerComponent(currentServer), // 服务器名称
+				playerNameComponent, // 玩家名
+				chatMessage // 聊天内容
+			));
+		}
+	}
+
+	public static void assembleAndConsume(Player player,
+										  String playerMessage,
+										  RegisteredServer currentServer,
+										  String serverId,
+										  Consumer<Component> globalConsumer,
+										  Consumer<Component> localConsumer) {
+		// 玩家名
+		Component playerNameComponent = ComponentUtils.getPlayerComponent(player);
+		// 构建玩家消息，Velocity API 居然把玩家队伍颜色阻断掉了，导致不能显示玩家队伍颜色
+		TextComponent chatMessage = Component.text(playerMessage);
+		// 发送消息
+		String serverChatFormatTranslationKey = Translates.SERVER_CHAT + serverId;
+		if (hasCustomTranslation(serverChatFormatTranslationKey)) {
+			globalConsumer.accept(Component.translatable(
+				serverChatFormatTranslationKey, // 追加子服务器id
+				Translates.PROXY_NAME, // 群组名称
+				ComponentUtils.getServerComponent(currentServer), // 服务器名称
+				playerNameComponent, // 玩家名
+				chatMessage // 聊天内容
+			));
+		} else {
+			globalConsumer.accept(Translates.DEFAULT_CHAT.args(
+				Translates.PROXY_NAME, // 群组名称
+				ComponentUtils.getServerComponent(currentServer), // 服务器名称
+				playerNameComponent, // 玩家名
+				chatMessage // 聊天内容
+			));
+		}
+		String localChatKey = serverChatFormatTranslationKey + Translates.SERVER_CHAT_LOCAL_SUFFIX;
+		if (hasCustomTranslation(localChatKey)) {
+			localConsumer.accept(Component.translatable(
+				localChatKey, // 追加子服务器id
+				Translates.PROXY_NAME, // 群组名称
+				ComponentUtils.getServerComponent(currentServer), // 服务器名称
+				playerNameComponent, // 玩家名
+				chatMessage // 聊天内容
+			));
+		} else {
+			localConsumer.accept(Translates.DEFAULT_LOCAL_CHAT.args(
 				Translates.PROXY_NAME, // 群组名称
 				ComponentUtils.getServerComponent(currentServer), // 服务器名称
 				playerNameComponent, // 玩家名

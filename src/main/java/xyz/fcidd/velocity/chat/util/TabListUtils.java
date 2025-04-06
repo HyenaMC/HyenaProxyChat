@@ -10,12 +10,12 @@ import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.jetbrains.annotations.NotNull;
-import xyz.fcidd.velocity.chat.config.VelocityChatConfig;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
+import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
 import static xyz.fcidd.velocity.chat.util.Utils.PROXY_SERVER;
 
 public class TabListUtils {
@@ -51,7 +51,7 @@ public class TabListUtils {
 	}
 
 	public static void reload() {
-		if (VelocityChatConfig.CONFIG.isShowGlobalTabList()) {
+		if (CONFIG.isShowGlobalTabList()) {
 			refresh();
 		} else {
 			reset();

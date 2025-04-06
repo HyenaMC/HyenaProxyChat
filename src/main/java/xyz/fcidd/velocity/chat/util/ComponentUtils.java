@@ -3,6 +3,7 @@ package xyz.fcidd.velocity.chat.util;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.TranslatableComponent;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -39,18 +40,19 @@ public class ComponentUtils {
 	}
 
 	public static @NotNull Component getServerComponent(@Nullable RegisteredServer server) {
-		return getServerComponent0(server, 0, null);
+		return getServerComponent(server, 0, null);
 	}
 
 	public static @NotNull Component getServerComponent(@Nullable RegisteredServer server, int playerCountOffset) {
-		return getServerComponent0(server, playerCountOffset, null);
+		return getServerComponent(server, playerCountOffset, null);
 	}
 
-	public static @NotNull Component getServerComponent(@Nullable RegisteredServer server, int playerCountOffset, @NotNull String currentServerId) {
-		if(server == null) return Component.empty();
+	public static @NotNull Component getServerComponent(@Nullable RegisteredServer server, int playerCountOffset, @Nullable String currentServerId) {
+		if (server == null) return Translates.SERVER_NOT_FOUND_NAME;
 		return getServerComponent0(server, playerCountOffset, currentServerId);
 	}
 
+	private static final TextComponent ID_ = Component.text("ID: ");
 	private static @NotNull Component getServerComponent0(@NotNull RegisteredServer server, int playerCountOffset, String currentServerId) {
 		String serverId = server.getServerInfo().getName();
 
@@ -68,25 +70,31 @@ public class ComponentUtils {
 
 		if (serverId.equals(currentServerId)) {
 			return serverComponent
-					.hoverEvent(HoverEvent
-						.showText(Component
-							.translatable("velocity.command.server-tooltip-current-server")
-							.append(Component.newline())
-							.append(playerCountComponent)));
+				.hoverEvent(HoverEvent
+					.showText(Component
+						.translatable("velocity.command.server-tooltip-current-server")
+						.appendNewline()
+						.append(playerCountComponent)
+						.appendNewline()
+						.append(ID_)
+						.append(Component.text(serverId))));
 		} else {
 			return serverComponent
-					.clickEvent(ClickEvent.runCommand("/server " + serverId))
-					.hoverEvent(HoverEvent
-						.showText(Component
-							.translatable("velocity.command.server-tooltip-offer-connect-server")
-							.append(Component.newline())
-							.append(playerCountComponent)));
+				.clickEvent(ClickEvent.runCommand("/server " + serverId))
+				.hoverEvent(HoverEvent
+					.showText(Component
+						.translatable("velocity.command.server-tooltip-offer-connect-server")
+						.appendNewline()
+						.append(playerCountComponent)
+						.appendNewline()
+						.append(ID_)
+						.append(Component.text(serverId))));
 		}
 	}
 
 	public static @NotNull Component getNonEventedServerComponent(String serverId) {
 		String serverTranslationKey = Translates.SERVER_NAME + serverId;
-		if (Utils.hasTranslation(serverTranslationKey)) {
+		if (Utils.hasCustomTranslation(serverTranslationKey)) {
 			return Component.translatable(serverTranslationKey);
 		} else {
 			return Component.text(serverId);

@@ -63,12 +63,24 @@ final class LanguageManagerImpl implements LanguageManager {
 
 	@Override
 	public void addToSource() {
-		GlobalTranslator.get().addSource(this);
+		GlobalTranslator globalTranslator;
+		try {
+			globalTranslator = GlobalTranslator.get();
+		} catch (NoSuchMethodError e) {
+			globalTranslator = GlobalTranslator.translator();
+		}
+		globalTranslator.addSource(this);
 	}
 
 	@Override
 	public void removeFromSource() {
-		GlobalTranslator.get().removeSource(this);
+		GlobalTranslator globalTranslator;
+		try {
+			globalTranslator = GlobalTranslator.get();
+		} catch (NoSuchMethodError e) {
+			globalTranslator = GlobalTranslator.translator();
+		}
+		globalTranslator.removeSource(this);
 	}
 
 	@Override

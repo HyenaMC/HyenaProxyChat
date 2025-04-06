@@ -39,12 +39,13 @@ public class PlayerChatListener {
 		String playerName = player.getUsername();
 		// 获取服务器ID
 		Optional<ServerConnection> currentServerOptional = player.getCurrentServer();
-		RegisteredServer currentServer = null;
+		RegisteredServer currentServer;
 		String serverId;
 		if (currentServerOptional.isPresent()) {
 			currentServer = currentServerOptional.get().getServer();
 			serverId = currentServer.getServerInfo().getName();
 		} else {
+			currentServer = null;
 			serverId = "";
 		}
 
@@ -53,7 +54,7 @@ public class PlayerChatListener {
 		if (!mcdrCommandPrefixes.isEmpty()
 			&& CharacterUtils.startsWithAny(playerMessage, mcdrCommandPrefixes)) {
 			if (CONFIG.isLogMcdrCommands()) {
-				logger.info("[mcdr][{}]<{}> {}", serverId, playerName, playerMessage);
+				logger.info("[mcdr:{}]<{}> {}", serverId, playerName, playerMessage);
 			}
 			return;
 		}
@@ -61,17 +62,27 @@ public class PlayerChatListener {
 		if (CONFIG.isOverwriteLocalChat()) {
 			// 取消消息发送！
 			event.setResult(denied());
-			Utils.sendGlobalPlayerChat(player, playerMessage, currentServer, serverId);
+			Utils.assembleAndConsume(player, playerMessage, currentServer, serverId,
+				text -> PROXY_SERVER.getAllServers().forEach(server -> {
+					if (server.equals(currentServer)) {
+						return;
+					}
+					server.sendMessage(text);
+				}), text -> {
+					if (currentServer != null) {
+						currentServer.sendMessage(text);
+					}
+				});
 		} else {
 			// 发送全局消息！
-			Utils.assembleAndComsume(player, playerMessage, currentServer, serverId,
+			Utils.assembleAndConsume(player, playerMessage, currentServer, serverId,
 				text -> PROXY_SERVER.getAllServers().forEach(server -> {
-					if (server.getServerInfo().getName().equals(serverId)) {
+					if (server.equals(currentServer)) {
 						return;
 					}
 					server.sendMessage(text);
 				}));
-			logger.info("[global:{}]<{}> {}", serverId, playerName, playerMessage);
 		}
+		logger.info("[global:{}]<{}> {}", serverId, playerName, playerMessage);
 	}
 }

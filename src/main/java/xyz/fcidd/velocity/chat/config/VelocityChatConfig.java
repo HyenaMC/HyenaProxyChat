@@ -13,7 +13,7 @@ import java.util.Map;
 import static xyz.fcidd.velocity.chat.VelocityChatPlugin.DATA_DIRECTORY;
 import static xyz.fcidd.velocity.chat.command.Commands.*;
 
-public class VelocityChatConfig extends AnnotationConfig {
+public final class VelocityChatConfig extends AnnotationConfig {
 	public static final VelocityChatConfig CONFIG = new VelocityChatConfig(DATA_DIRECTORY.resolve("config.toml"));
 	@Getter
 	@ConfigKey(comment = """
@@ -65,6 +65,21 @@ public class VelocityChatConfig extends AnnotationConfig {
 	private boolean enableCommandGlist = true;
 	@Getter
 	@ConfigKey(comment = """
+		是否启用跨服Tell
+		Enable cross-server tell.""")
+	private boolean enableCommandTell = true;
+	@Getter
+	@ConfigKey(comment = """
+		自定义“/glist”反馈消息
+		Custom command `/glist` response.""")
+	private boolean customGlistCommand = true;
+	@Getter
+	@ConfigKey(comment = """
+		自定义“/server”反馈消息
+		Custom command `/server` response.""")
+	private boolean customServerCommand = true;
+	@Getter
+	@ConfigKey(comment = """
 		是否可以使用“&”作为聊天格式化代码
 		Enable color code in chat.""")
 	private boolean colorableChat = true;
@@ -85,7 +100,7 @@ public class VelocityChatConfig extends AnnotationConfig {
 	@Getter
 	private String commandLocalAlias;
 
-	protected VelocityChatConfig(@NotNull Path configPath) {
+	private VelocityChatConfig(@NotNull Path configPath) {
 		super(configPath);
 	}
 

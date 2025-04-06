@@ -13,6 +13,7 @@ import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ServerConnection;
 import fun.qu_an.lib.mc.util.FormatUtils;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.slf4j.Logger;
 import xyz.fcidd.velocity.chat.VelocityChatPlugin;
 import xyz.fcidd.velocity.chat.text.Translates;
@@ -21,7 +22,6 @@ import xyz.fcidd.velocity.chat.util.Utils;
 import java.util.Optional;
 
 import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
-import static xyz.fcidd.velocity.chat.text.Translates.PLAYER_ONLY;
 import static xyz.fcidd.velocity.chat.util.Utils.PROXY_SERVER;
 
 public class VchatCommand {
@@ -66,9 +66,8 @@ public class VchatCommand {
 		BrigadierCommand broadcastCommand;
 		if (!commandManager.hasCommand(commandBroadcastAlias)) {
 			broadcastCommand = new BrigadierCommand(getBroadcast(commandBroadcastAlias));
-			CommandMeta broadcastMeta = commandManager.metaBuilder(broadcastCommand).build();
+			broadcastMeta = commandManager.metaBuilder(broadcastCommand).build();
 			commandManager.register(broadcastMeta, broadcastCommand);
-			VchatCommand.broadcastMeta = broadcastMeta;
 		} else {
 			logger.warn("Command {} is occupied!", commandBroadcastAlias);
 		}
@@ -77,9 +76,8 @@ public class VchatCommand {
 		BrigadierCommand localCommand;
 		if (!commandManager.hasCommand(commandLocalAlias)) {
 			localCommand = new BrigadierCommand(getLocal(commandLocalAlias));
-			CommandMeta localMeta = commandManager.metaBuilder(localCommand).build();
+			localMeta = commandManager.metaBuilder(localCommand).build();
 			commandManager.register(localMeta, localCommand);
-			VchatCommand.localMeta = localMeta;
 		} else {
 			logger.warn("Command {} is occupied!", commandLocalAlias);
 		}
@@ -102,7 +100,7 @@ public class VchatCommand {
 		String message = context.getArgument("message", String.class);
 		CommandSource source = context.getSource();
 		if (!(source instanceof Player player)) {
-			source.sendMessage(PLAYER_ONLY);
+			source.sendMessage(Component.translatable("velocity.command.players-only", NamedTextColor.RED));
 			return 0;
 		}
 		Optional<ServerConnection> currentServer = player.getCurrentServer();

@@ -6,7 +6,6 @@ import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
-import xyz.fcidd.velocity.chat.config.VelocityChatConfig;
 import xyz.fcidd.velocity.chat.text.Translates;
 import xyz.fcidd.velocity.chat.util.ComponentUtils;
 import xyz.fcidd.velocity.chat.util.TabListUtils;
@@ -14,6 +13,7 @@ import xyz.fcidd.velocity.chat.util.Utils;
 
 import java.util.concurrent.TimeUnit;
 
+import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
 import static xyz.fcidd.velocity.chat.util.Utils.TASK_UTIL;
 
 public class ServerConnectedListener {
@@ -41,7 +41,7 @@ public class ServerConnectedListener {
 					targetServerComponent
 				));
 			});
-		if (VelocityChatConfig.CONFIG.isShowGlobalTabList()) {
+		if (CONFIG.isShowGlobalTabList()) {
 			TASK_UTIL.delay(2, TimeUnit.SECONDS, TabListUtils::refresh);
 		}
 	}

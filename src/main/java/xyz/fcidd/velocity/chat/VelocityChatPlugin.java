@@ -12,6 +12,7 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import fun.qu_an.lib.velocity.api.language.LanguageManager;
 import lombok.Getter;
 import org.slf4j.Logger;
+import xyz.fcidd.velocity.chat.command.TellCommand;
 import xyz.fcidd.velocity.chat.command.VchatCommand;
 import xyz.fcidd.velocity.chat.listener.*;
 import xyz.fcidd.velocity.chat.util.ComponentUtils;
@@ -51,6 +52,7 @@ public class VelocityChatPlugin {
 		load(); // 1、2
 		// 注册命令
 		VchatCommand.register(); // 3
+		TellCommand.register();
 		// 注册事件
 		EventManager eventManager = proxyServer.getEventManager();
 		// 命令执行
