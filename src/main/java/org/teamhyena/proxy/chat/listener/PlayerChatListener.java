@@ -1,4 +1,4 @@
-package xyz.fcidd.velocity.chat.listener;
+package org.teamhyena.proxy.chat.listener;
 
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.player.PlayerChatEvent;
@@ -9,18 +9,18 @@ import fun.qu_an.lib.mc.util.FormatUtils;
 import fun.qu_an.lib.util.CharacterUtils;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
-import xyz.fcidd.velocity.chat.VelocityChatPlugin;
-import xyz.fcidd.velocity.chat.util.Utils;
+import org.teamhyena.proxy.chat.HyenaProxyChatPlugin;
+import org.teamhyena.proxy.chat.util.Utils;
 
 import java.util.List;
 import java.util.Optional;
 
 import static com.velocitypowered.api.event.player.PlayerChatEvent.ChatResult.denied;
-import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
-import static xyz.fcidd.velocity.chat.util.Utils.PROXY_SERVER;
+import static org.teamhyena.proxy.chat.config.HyenaProxyChatConfig.CONFIG;
+import static org.teamhyena.proxy.chat.util.Utils.PROXY_SERVER;
 
 public class PlayerChatListener {
-	private static final Logger logger = VelocityChatPlugin.getLogger();
+	private static final Logger logger = HyenaProxyChatPlugin.getLogger();
 
 	@Subscribe()
 	public void onPlayerChat(@NotNull PlayerChatEvent event) {

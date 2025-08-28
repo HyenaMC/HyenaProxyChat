@@ -1,4 +1,4 @@
-package xyz.fcidd.velocity.chat.util;
+package org.teamhyena.proxy.chat.util;
 
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
@@ -9,15 +9,15 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import xyz.fcidd.velocity.chat.VelocityChatPlugin;
-import xyz.fcidd.velocity.chat.text.Translates;
+import org.teamhyena.proxy.chat.HyenaProxyChatPlugin;
+import org.teamhyena.proxy.chat.text.Translates;
 
 import java.util.function.Consumer;
 
 public class Utils {
-	public static final ProxyServer PROXY_SERVER = VelocityChatPlugin.getProxyServer();
-	public static final PlayerUtil PLAYER_UTIL = PlayerUtil.create(PROXY_SERVER, VelocityChatPlugin.getInstance());
-	public static final TaskUtil TASK_UTIL = TaskUtil.create(VelocityChatPlugin.getInstance(), PROXY_SERVER);
+	public static final ProxyServer PROXY_SERVER = HyenaProxyChatPlugin.getProxyServer();
+	public static final PlayerUtil PLAYER_UTIL = PlayerUtil.create(PROXY_SERVER, HyenaProxyChatPlugin.getInstance());
+	public static final TaskUtil TASK_UTIL = TaskUtil.create(HyenaProxyChatPlugin.getInstance(), PROXY_SERVER);
 
 	public static boolean hasCustomTranslation(String key) {
 		return Translates.CUSTOM_LANG.contains(key);
@@ -41,7 +41,7 @@ public class Utils {
 	public static void sendToAllPlayers(@NotNull Component text, String log, Object... args) {
 //		PROXY_SERVER.sendMessage(text);
 		PROXY_SERVER.getAllPlayers().forEach(player -> player.sendMessage(text));
-		if (log != null) VelocityChatPlugin.getLogger().info(log, args);
+		if (log != null) HyenaProxyChatPlugin.getLogger().info(log, args);
 	}
 
 	public static void assembleAndConsume(Player player,

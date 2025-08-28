@@ -1,4 +1,4 @@
-package xyz.fcidd.velocity.chat.command;
+package org.teamhyena.proxy.chat.command;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -11,12 +11,12 @@ import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ServerConnection;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
-import xyz.fcidd.velocity.chat.text.Translates;
-import xyz.fcidd.velocity.chat.util.ComponentUtils;
+import org.teamhyena.proxy.chat.text.Translates;
+import org.teamhyena.proxy.chat.util.ComponentUtils;
 
-import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
-import static xyz.fcidd.velocity.chat.util.Utils.PLAYER_UTIL;
-import static xyz.fcidd.velocity.chat.util.Utils.PROXY_SERVER;
+import static org.teamhyena.proxy.chat.config.HyenaProxyChatConfig.CONFIG;
+import static org.teamhyena.proxy.chat.util.Utils.PLAYER_UTIL;
+import static org.teamhyena.proxy.chat.util.Utils.PROXY_SERVER;
 
 public class TellCommand {
 	public static void register() {

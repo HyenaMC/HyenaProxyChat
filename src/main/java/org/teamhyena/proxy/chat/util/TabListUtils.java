@@ -1,4 +1,4 @@
-package xyz.fcidd.velocity.chat.util;
+package org.teamhyena.proxy.chat.util;
 
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ServerConnection;
@@ -15,8 +15,8 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
-import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
-import static xyz.fcidd.velocity.chat.util.Utils.PROXY_SERVER;
+import static org.teamhyena.proxy.chat.config.HyenaProxyChatConfig.CONFIG;
+import static org.teamhyena.proxy.chat.util.Utils.PROXY_SERVER;
 
 public class TabListUtils {
 	public static void refresh() {

@@ -1,4 +1,4 @@
-package xyz.fcidd.velocity.chat.config;
+package org.teamhyena.proxy.chat.config;
 
 import com.electronwill.nightconfig.core.Config;
 import fun.qu_an.lib.config.AnnotationConfig;
@@ -10,11 +10,11 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
-import static xyz.fcidd.velocity.chat.VelocityChatPlugin.DATA_DIRECTORY;
-import static xyz.fcidd.velocity.chat.command.Commands.*;
+import static org.teamhyena.proxy.chat.HyenaProxyChatPlugin.DATA_DIRECTORY;
+import static org.teamhyena.proxy.chat.command.Commands.*;
 
-public final class VelocityChatConfig extends AnnotationConfig {
-	public static final VelocityChatConfig CONFIG = new VelocityChatConfig(DATA_DIRECTORY.resolve("config.toml"));
+public final class HyenaProxyChatConfig extends AnnotationConfig {
+	public static final HyenaProxyChatConfig CONFIG = new HyenaProxyChatConfig(DATA_DIRECTORY.resolve("config.toml"));
 	@Getter
 	@ConfigKey(comment = """
 		在此处填写 MCDR 命令的前缀，支持多个MCDR命令前缀
@@ -100,7 +100,7 @@ public final class VelocityChatConfig extends AnnotationConfig {
 	@Getter
 	private String commandLocalAlias;
 
-	private VelocityChatConfig(@NotNull Path configPath) {
+	private HyenaProxyChatConfig(@NotNull Path configPath) {
 		super(configPath);
 	}
 

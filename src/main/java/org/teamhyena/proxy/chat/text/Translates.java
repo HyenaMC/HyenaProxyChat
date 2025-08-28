@@ -1,12 +1,12 @@
-package xyz.fcidd.velocity.chat.text;
+package org.teamhyena.proxy.chat.text;
 
 import fun.qu_an.lib.velocity.api.language.LanguageManager;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TranslatableComponent;
-import xyz.fcidd.velocity.chat.VelocityChatPlugin;
+import org.teamhyena.proxy.chat.HyenaProxyChatPlugin;
 
-import static xyz.fcidd.velocity.chat.VelocityChatPlugin.DATA_DIRECTORY;
+import static org.teamhyena.proxy.chat.HyenaProxyChatPlugin.DATA_DIRECTORY;
 
 public class Translates {
 	public static final Component DASH_AND_SPACE = Component.text("- ");
@@ -67,7 +67,7 @@ public class Translates {
 	public static final Component SERVER_NOT_FOUND_NAME = Component.text("<unknown>");
 
 	public static final LanguageManager DEFAULT_LANG = LanguageManager.create(
-		VelocityChatPlugin.getInstance(),
+		HyenaProxyChatPlugin.getInstance(),
 		Key.key("qu_an", "chat_default"),
 		DATA_DIRECTORY.resolve("langs/default"),
 		"langs/default",
@@ -75,7 +75,7 @@ public class Translates {
 	);
 
 	public static final LanguageManager CUSTOM_LANG = LanguageManager.create(
-		VelocityChatPlugin.getInstance(),
+		HyenaProxyChatPlugin.getInstance(),
 		Key.key("qu_an", "chat_custom"),
 		DATA_DIRECTORY.resolve("langs/custom"),
 		"langs/custom"

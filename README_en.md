@@ -1,4 +1,6 @@
-# VelocityChat
+# HyenaProxyChat
+
+This is a fork of [VelocityChat](https://github.com/MapleDust/VelocityChat), renamed to avoid confusion.
 
 - [中文](./README.md)
 - English
@@ -25,7 +27,7 @@ A Cross-server chat plugin for Velocity proxy
 
 ## Files
 
-Locate in `plugins/VelocityChat`
+Locate in `plugins/HyenaProxyChat`
 
 ### Configuration `config.toml`
 

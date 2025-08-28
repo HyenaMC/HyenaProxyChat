@@ -1,4 +1,4 @@
-package xyz.fcidd.velocity.chat.util;
+package org.teamhyena.proxy.chat.util;
 
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
@@ -10,8 +10,8 @@ import net.kyori.adventure.text.event.HoverEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
-import xyz.fcidd.velocity.chat.VelocityChatPlugin;
-import xyz.fcidd.velocity.chat.text.Translates;
+import org.teamhyena.proxy.chat.HyenaProxyChatPlugin;
+import org.teamhyena.proxy.chat.text.Translates;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @SuppressWarnings("unused")
 public class ComponentUtils {
 	private static final Map<Player, Component> PLAYER_COMPONENT_CACHE = new ConcurrentHashMap<>();
-	private static final Logger logger = VelocityChatPlugin.getLogger();
+	private static final Logger logger = HyenaProxyChatPlugin.getLogger();
 
 	public static @NotNull Component getPlayerComponent(@NotNull Player player) {
 		Component component = PLAYER_COMPONENT_CACHE.get(player);

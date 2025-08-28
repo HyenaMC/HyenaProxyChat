@@ -1,4 +1,4 @@
-package xyz.fcidd.velocity.chat.listener;
+package org.teamhyena.proxy.chat.listener;
 
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.command.CommandExecuteEvent;
@@ -12,10 +12,10 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.JoinConfiguration;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.jetbrains.annotations.NotNull;
-import xyz.fcidd.velocity.chat.VelocityChatPlugin;
-import xyz.fcidd.velocity.chat.command.Commands;
-import xyz.fcidd.velocity.chat.text.Translates;
-import xyz.fcidd.velocity.chat.util.ComponentUtils;
+import org.teamhyena.proxy.chat.HyenaProxyChatPlugin;
+import org.teamhyena.proxy.chat.command.Commands;
+import org.teamhyena.proxy.chat.text.Translates;
+import org.teamhyena.proxy.chat.util.ComponentUtils;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,12 +23,12 @@ import java.util.Optional;
 
 import static com.velocitypowered.api.event.command.CommandExecuteEvent.CommandResult.denied;
 import static com.velocitypowered.api.event.command.CommandExecuteEvent.CommandResult.forwardToServer;
-import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
-import static xyz.fcidd.velocity.chat.util.Utils.PLAYER_UTIL;
+import static org.teamhyena.proxy.chat.config.HyenaProxyChatConfig.CONFIG;
+import static org.teamhyena.proxy.chat.util.Utils.PLAYER_UTIL;
 
 public class CommandExecuteListener {
 	private static final JoinConfiguration COMMA_AND_SPACE = JoinConfiguration.separator(Translates.COMMA_AND_SPACE.color(NamedTextColor.GRAY));
-	private final ProxyServer proxyServer = VelocityChatPlugin.getProxyServer();
+	private final ProxyServer proxyServer = HyenaProxyChatPlugin.getProxyServer();
 
 	@Subscribe
 	public void onCommandExecute(@NotNull CommandExecuteEvent event) {

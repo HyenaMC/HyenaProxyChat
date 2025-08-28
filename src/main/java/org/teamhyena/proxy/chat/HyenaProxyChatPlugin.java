@@ -1,4 +1,4 @@
-package xyz.fcidd.velocity.chat;
+package org.teamhyena.proxy.chat;
 
 import com.google.inject.Inject;
 import com.velocitypowered.api.event.EventManager;
@@ -12,28 +12,28 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import fun.qu_an.lib.velocity.api.language.LanguageManager;
 import lombok.Getter;
 import org.slf4j.Logger;
-import xyz.fcidd.velocity.chat.command.TellCommand;
-import xyz.fcidd.velocity.chat.command.VchatCommand;
-import xyz.fcidd.velocity.chat.listener.*;
-import xyz.fcidd.velocity.chat.util.ComponentUtils;
-import xyz.fcidd.velocity.chat.util.TabListUtils;
+import org.teamhyena.proxy.chat.command.TellCommand;
+import org.teamhyena.proxy.chat.command.VchatCommand;
+import org.teamhyena.proxy.chat.listener.*;
+import org.teamhyena.proxy.chat.util.ComponentUtils;
+import org.teamhyena.proxy.chat.util.TabListUtils;
 
 import java.nio.file.Path;
 
-import static xyz.fcidd.velocity.chat.BuildConstants.*;
-import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
-import static xyz.fcidd.velocity.chat.text.Translates.CUSTOM_LANG;
-import static xyz.fcidd.velocity.chat.text.Translates.DEFAULT_LANG;
-import static xyz.fcidd.velocity.chat.util.Utils.PLAYER_UTIL;
+import static org.teamhyena.proxy.chat.BuildConstants.*;
+import static org.teamhyena.proxy.chat.config.HyenaProxyChatConfig.CONFIG;
+import static org.teamhyena.proxy.chat.text.Translates.CUSTOM_LANG;
+import static org.teamhyena.proxy.chat.text.Translates.DEFAULT_LANG;
+import static org.teamhyena.proxy.chat.util.Utils.PLAYER_UTIL;
 
 @Plugin(id = PLUGIN_ID,
 	name = PLUGIN_NAME,
 	version = VERSION,
-	authors = {"MapleDust", "Harvey_Husky"}
+	authors = {"kpAjun", "MapleDust (Origin)", "Harvey_Husky (Origin)"}
 )
-public class VelocityChatPlugin {
+public class HyenaProxyChatPlugin {
 	@Getter
-	private static VelocityChatPlugin instance;
+	private static HyenaProxyChatPlugin instance;
 	@Getter
 	private static ProxyServer proxyServer;
 	@Getter
@@ -41,10 +41,10 @@ public class VelocityChatPlugin {
 	public static final Path DATA_DIRECTORY = Path.of("plugins").resolve(PLUGIN_NAME);
 
 	@Inject
-	public VelocityChatPlugin(ProxyServer proxyServer, Logger logger) {
-		VelocityChatPlugin.proxyServer = proxyServer;
-		VelocityChatPlugin.logger = logger;
-		VelocityChatPlugin.instance = this;
+	public HyenaProxyChatPlugin(ProxyServer proxyServer, Logger logger) {
+		HyenaProxyChatPlugin.proxyServer = proxyServer;
+		HyenaProxyChatPlugin.logger = logger;
+		HyenaProxyChatPlugin.instance = this;
 	}
 
 	@Subscribe

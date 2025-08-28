@@ -1,4 +1,4 @@
-package xyz.fcidd.velocity.chat.command;
+package org.teamhyena.proxy.chat.command;
 
 public class Commands {
 	public static final String[] TELL = {"tell", "msg"};

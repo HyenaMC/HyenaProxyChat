@@ -1,4 +1,6 @@
-# VelocityChat
+# HyenaProxyChat
+
+该插件是[VelocityChat](https://github.com/MapleDust/VelocityChat)的分支，依照GPL-3.0协议的要求而重命名。
 
 - 中文
 - [English](./README_en.md)
@@ -24,7 +26,7 @@
 
 ## 文件
 
-位于`plugins/VelocityChat`目录下
+位于`plugins/HyenaProxyChat`目录下
 
 ### 配置 `config.toml`
 

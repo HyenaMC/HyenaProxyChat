@@ -1,4 +1,4 @@
-package xyz.fcidd.velocity.chat.listener;
+package org.teamhyena.proxy.chat.listener;
 
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.player.ServerConnectedEvent;
@@ -6,15 +6,15 @@ import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
-import xyz.fcidd.velocity.chat.text.Translates;
-import xyz.fcidd.velocity.chat.util.ComponentUtils;
-import xyz.fcidd.velocity.chat.util.TabListUtils;
-import xyz.fcidd.velocity.chat.util.Utils;
+import org.teamhyena.proxy.chat.text.Translates;
+import org.teamhyena.proxy.chat.util.ComponentUtils;
+import org.teamhyena.proxy.chat.util.TabListUtils;
+import org.teamhyena.proxy.chat.util.Utils;
 
 import java.util.concurrent.TimeUnit;
 
-import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
-import static xyz.fcidd.velocity.chat.util.Utils.TASK_UTIL;
+import static org.teamhyena.proxy.chat.config.HyenaProxyChatConfig.CONFIG;
+import static org.teamhyena.proxy.chat.util.Utils.TASK_UTIL;
 
 public class ServerConnectedListener {
 	@Subscribe()

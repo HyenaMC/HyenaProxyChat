@@ -1,4 +1,4 @@
-package xyz.fcidd.velocity.chat.command;
+package org.teamhyena.proxy.chat.command;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -15,17 +15,17 @@ import fun.qu_an.lib.mc.util.FormatUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.slf4j.Logger;
-import xyz.fcidd.velocity.chat.VelocityChatPlugin;
-import xyz.fcidd.velocity.chat.text.Translates;
-import xyz.fcidd.velocity.chat.util.Utils;
+import org.teamhyena.proxy.chat.HyenaProxyChatPlugin;
+import org.teamhyena.proxy.chat.text.Translates;
+import org.teamhyena.proxy.chat.util.Utils;
 
 import java.util.Optional;
 
-import static xyz.fcidd.velocity.chat.config.VelocityChatConfig.CONFIG;
-import static xyz.fcidd.velocity.chat.util.Utils.PROXY_SERVER;
+import static org.teamhyena.proxy.chat.config.HyenaProxyChatConfig.CONFIG;
+import static org.teamhyena.proxy.chat.util.Utils.PROXY_SERVER;
 
 public class VchatCommand {
-	private static final Logger logger = VelocityChatPlugin.getLogger();
+	private static final Logger logger = HyenaProxyChatPlugin.getLogger();
 	private static final RequiredArgumentBuilder<CommandSource, String> broadcastMessageNode = RequiredArgumentBuilder
 		.<CommandSource, String>argument("message", StringArgumentType.greedyString())
 		.executes(VchatCommand::executeBroadcast);
@@ -109,7 +109,7 @@ public class VchatCommand {
 			return 0;
 		}
 		player.spoofChatInput(message);
-		VelocityChatPlugin.getLogger().info("[local:{}]<{}> {}", currentServer.get().getServerInfo().getName(), player.getUsername(), message);
+		HyenaProxyChatPlugin.getLogger().info("[local:{}]<{}> {}", currentServer.get().getServerInfo().getName(), player.getUsername(), message);
 		return 1;
 	}
 
@@ -128,7 +128,7 @@ public class VchatCommand {
 	}
 
 	private static int executeReload(CommandContext<CommandSource> context) {
-		VelocityChatPlugin.reload();
+		HyenaProxyChatPlugin.reload();
 		return 1;
 	}
 
