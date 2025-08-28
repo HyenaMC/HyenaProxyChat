@@ -30,15 +30,15 @@ tasks {
 }
 
 dependencies {
-    compileOnly 'com.velocitypowered:velocity-api:3.3.0-SNAPSHOT'
-    annotationProcessor 'com.velocitypowered:velocity-api:3.3.0-SNAPSHOT'
+    compileOnly 'com.velocitypowered:velocity-api:3.4.0-SNAPSHOT'
+    annotationProcessor 'com.velocitypowered:velocity-api:3.4.0-SNAPSHOT'
     compileOnly 'com.electronwill.night-config:toml:3.6.6'
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
-    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+    compileOnly 'org.projectlombok:lombok:1.18.32'
     implementation 'net.william278:papiproxybridge:1.6'
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 21
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
