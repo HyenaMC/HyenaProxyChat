@@ -29,7 +29,7 @@ import static org.teamhyena.proxy.chat.util.Utils.PLAYER_UTIL;
 @Plugin(id = PLUGIN_ID,
 	name = PLUGIN_NAME,
 	version = VERSION,
-	authors = {"kpAjun", "MapleDust (Origin)", "Harvey_Husky (Origin)"}
+	authors = {"kpAjun@HyenaMC", "MapleDust (Origin)", "Harvey_Husky (Origin)"}
 )
 public class HyenaProxyChatPlugin {
 	@Getter
