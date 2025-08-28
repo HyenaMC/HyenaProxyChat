@@ -173,6 +173,11 @@ final class LanguageManagerImpl implements LanguageManager {
 	}
 
 	@Override
+	public boolean contains(String key, Locale locale) {
+		return registry != null && registry.contains(key, locale);
+	}
+
+	@Override
 	public @Nullable MessageFormat translate(@NotNull String key, @NotNull Locale locale) {
 		return registry.translate(key, locale);
 	}
