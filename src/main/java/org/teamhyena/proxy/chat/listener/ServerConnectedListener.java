@@ -29,14 +29,16 @@ public class ServerConnectedListener {
 		event.getPreviousServer().ifPresentOrElse(
 			server -> {
 				// 发送服务器切换消息
-				Utils.sendToAllPlayers(Translates.SERVER_SWITCH.args(
+				Utils.sendToAllPlayers(Component.translatable(
+					Translates.SERVER_SWITCH.key(),
 					playerNameComponent,
 					ComponentUtils.getServerComponent(server),
 					targetServerComponent)
 				);
 			}, () -> {
 				// 发送服务器连接消息
-				Utils.sendToAllPlayers(Translates.CONNECTED.args(
+				Utils.sendToAllPlayers(Component.translatable(
+					Translates.CONNECTED.key(),
 					playerNameComponent,
 					targetServerComponent
 				));

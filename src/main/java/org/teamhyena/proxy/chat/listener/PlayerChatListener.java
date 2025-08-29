@@ -17,7 +17,6 @@ import java.util.Optional;
 
 import static com.velocitypowered.api.event.player.PlayerChatEvent.ChatResult.denied;
 import static org.teamhyena.proxy.chat.config.HyenaProxyChatConfig.CONFIG;
-import static org.teamhyena.proxy.chat.util.Utils.PROXY_SERVER;
 
 public class PlayerChatListener {
 	private static final Logger logger = HyenaProxyChatPlugin.getLogger();
@@ -63,25 +62,14 @@ public class PlayerChatListener {
 			// 取消消息发送！
 			event.setResult(denied());
 			Utils.assembleAndConsume(player, playerMessage, currentServer, serverId,
-				text -> PROXY_SERVER.getAllServers().forEach(server -> {
-					if (server.equals(currentServer)) {
-						return;
-					}
-					server.sendMessage(text);
-				}), text -> {
-					if (currentServer != null) {
-						currentServer.sendMessage(text);
-					}
-				});
+				text -> Utils.sendToAllServersExcept(currentServer, text),
+				text -> { if (currentServer != null) Utils.sendToServerPlayers(currentServer, text); }
+			);
 		} else {
 			// 发送全局消息！
 			Utils.assembleAndConsume(player, playerMessage, currentServer, serverId,
-				text -> PROXY_SERVER.getAllServers().forEach(server -> {
-					if (server.equals(currentServer)) {
-						return;
-					}
-					server.sendMessage(text);
-				}));
+				text -> Utils.sendToAllServersExcept(currentServer, text)
+			);
 		}
 		logger.info("[global:{}]<{}> {}", serverId, playerName, playerMessage);
 	}

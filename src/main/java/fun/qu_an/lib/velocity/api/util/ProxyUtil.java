@@ -45,12 +45,10 @@ public final class ProxyUtil {
 		int onlinePlayers = server.getPlayersConnected().size();
 		if (onlinePlayers == 1) {
 			return Component
-				.translatable("velocity.command.server-tooltip-player-online")
-				.args(Component.text(onlinePlayers));
+				.translatable("velocity.command.server-tooltip-player-online", Component.text(onlinePlayers));
 		} else {
 			return Component
-				.translatable("velocity.command.server-tooltip-players-online")
-				.args(Component.text(onlinePlayers));
+				.translatable("velocity.command.server-tooltip-players-online", Component.text(onlinePlayers));
 		}
 	}
 

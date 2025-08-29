@@ -16,6 +16,7 @@ import org.teamhyena.proxy.chat.HyenaProxyChatPlugin;
 import org.teamhyena.proxy.chat.command.Commands;
 import org.teamhyena.proxy.chat.text.Translates;
 import org.teamhyena.proxy.chat.util.ComponentUtils;
+import org.teamhyena.proxy.chat.util.Utils;
 
 import java.util.Collection;
 import java.util.List;
@@ -56,8 +57,9 @@ public class CommandExecuteListener {
 				.map(RegisteredServer::getServerInfo)
 				.map(ServerInfo::getName).orElse(null);
 			if (currentServer != null) {
-				sourcePlayer.sendMessage(Translates.COMMAND_SERVER_CURRENT
-					.args(ComponentUtils.getServerComponent(currentServer, 0, serverName)));
+				Utils.sendToPlayer(sourcePlayer, Component.translatable(
+					Translates.COMMAND_SERVER_CURRENT.key(),
+					ComponentUtils.getServerComponent(currentServer, 0, serverName)));
 			}
 			Collection<RegisteredServer> allServers = proxyServer.getAllServers();
 			if (allServers.size() > 50) {
@@ -67,8 +69,9 @@ public class CommandExecuteListener {
 			List<Component> servers = allServers.stream()
 				.map(server -> ComponentUtils.getServerComponent(server, 0, serverName))
 				.toList();
-			sourcePlayer.sendMessage(Translates.COMMAND_SERVER_AVAILABLE
-				.args(Component.join(COMMA_AND_SPACE, servers)));
+			Utils.sendToPlayer(sourcePlayer, Component.translatable(
+				Translates.COMMAND_SERVER_AVAILABLE.key(),
+				Component.join(COMMA_AND_SPACE, servers)));
 			return;
 		}
 
@@ -132,9 +135,8 @@ public class CommandExecuteListener {
 	private void sendTotalProxyCount(Player target) {
 		final int online = proxyServer.getPlayerCount();
 		target.sendMessage((online == 1
-			? Translates.GLIST_PLAYER_COUNT_SINGULAR
-			: Translates.GLIST_PLAYER_COUNT_PLURAL)
-			.args(Component.text(online, NamedTextColor.GREEN)));
+			? Component.translatable(Translates.GLIST_PLAYER_COUNT_SINGULAR.key(), Component.text(online, NamedTextColor.GREEN))
+			: Component.translatable(Translates.GLIST_PLAYER_COUNT_PLURAL.key(), Component.text(online, NamedTextColor.GREEN))));
 	}
 
 	private void sendServerPlayers(final Player target,
@@ -145,7 +147,8 @@ public class CommandExecuteListener {
 			.toList();
 		Component players = Component.join(COMMA_AND_SPACE, components);
 		if (!players.children().isEmpty() || force) {
-			target.sendMessage(Translates.GLIST_ENTRY.args(
+			Utils.sendToPlayer(target, Component.translatable(
+				Translates.GLIST_ENTRY.key(),
 				ComponentUtils.getServerComponent(server),
 				Component.text(playersConnected.size(), NamedTextColor.GREEN),
 				players));

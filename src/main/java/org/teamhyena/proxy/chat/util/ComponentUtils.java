@@ -27,10 +27,7 @@ public class ComponentUtils {
 		String playerName = player.getUsername();
 		Component playerComponent = Component.text(playerName)
 			.hoverEvent(player.asHoverEvent())
-			.clickEvent(ClickEvent.clickEvent(
-				ClickEvent.Action.SUGGEST_COMMAND,
-				"/tell " + playerName + " "
-			));
+			.clickEvent(ClickEvent.suggestCommand("/tell " + playerName + " "));
 		PLAYER_COMPONENT_CACHE.put(player, playerComponent);
 		return playerComponent;
 	}

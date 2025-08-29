@@ -11,8 +11,10 @@ import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ServerConnection;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.teamhyena.proxy.chat.text.Translates;
 import org.teamhyena.proxy.chat.util.ComponentUtils;
+import org.teamhyena.proxy.chat.util.Utils;
 
 import static org.teamhyena.proxy.chat.config.HyenaProxyChatConfig.CONFIG;
 import static org.teamhyena.proxy.chat.util.Utils.PLAYER_UTIL;
@@ -63,20 +65,29 @@ public class TellCommand {
 				.orElse(Translates.SERVER_NOT_FOUND_NAME);
 			String msg = context.getArgument("msg", String.class);
 			TextComponent tellMessage = Component.text(msg);
-			targetPlayer.sendMessage(Translates.TELL_MESSAGE.args(
+			// 目标玩家
+			Utils.sendToPlayer(targetPlayer, Component.translatable(
+				Translates.TELL_MESSAGE.key(),
 				source instanceof Player player ? ComponentUtils.getPlayerComponent(player)
-					: Component.text("§4[Proxy]§r"),
+					: Component.text("[Proxy]", NamedTextColor.DARK_RED),
 				tellMessage,
 				sourceServerComponent,
 				targetServerComponent
 			));
-			// 发送反馈
-			source.sendMessage(Translates.TELL_RESPONSE.args(
+			// 发送反馈给源
+			Component response = Component.translatable(
+				Translates.TELL_RESPONSE.key(),
 				ComponentUtils.getPlayerComponent(targetPlayer),
 				tellMessage,
 				sourceServerComponent,
 				targetServerComponent
-			));
+			);
+			if (source instanceof Player sp) {
+				Utils.sendToPlayer(sp, response);
+			} else {
+				// 非玩家：按默认 Locale 渲染后发送
+				source.sendMessage(Utils.renderForDefaultLocale(response));
+			}
 		});
 		return 1;
 	}
