@@ -106,7 +106,7 @@ public class VchatCommand {
 		}
 		Optional<ServerConnection> currentServer = player.getCurrentServer();
 		if (currentServer.isEmpty()) {
-			player.sendMessage(Translates.SERVER_NOT_FOUND);
+			Utils.sendToPlayer(player, Translates.SERVER_NOT_FOUND);
 			return 0;
 		}
 		player.spoofChatInput(message);
@@ -136,13 +136,19 @@ public class VchatCommand {
 	}
 
 	private static int executeHelp(CommandContext<CommandSource> context) {
-		context.getSource().sendMessage(Translates.HELP
+		Component help = Translates.HELP
 			.append(Component.newline())
 			.append(Translates.DASH_AND_SPACE)
 			.append(Component.translatable(Translates.HELP_BROADCAST.key(), Component.text(CONFIG.getCommandBroadcastAlias())))
 			.append(Component.newline())
 			.append(Translates.DASH_AND_SPACE)
-			.append(Component.translatable(Translates.HELP_LOCAL.key(), Component.text(CONFIG.getCommandLocalAlias()))));
+			.append(Component.translatable(Translates.HELP_LOCAL.key(), Component.text(CONFIG.getCommandLocalAlias())));
+		CommandSource source = context.getSource();
+		if (source instanceof Player player) {
+			Utils.sendToPlayer(player, help);
+		} else {
+			source.sendMessage(Utils.renderForDefaultLocale(help));
+		}
 		return 1;
 	}
 }
