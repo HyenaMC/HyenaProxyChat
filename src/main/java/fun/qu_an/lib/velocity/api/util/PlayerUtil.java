@@ -171,10 +171,7 @@ public final class PlayerUtil {
 		String playerName = player.getUsername();
 		return Component.text(playerName)
 			.hoverEvent(player.asHoverEvent())
-			.clickEvent(ClickEvent.clickEvent(
-				ClickEvent.Action.SUGGEST_COMMAND,
-				"/tell " + playerName + " "
-			));
+			.clickEvent(ClickEvent.suggestCommand("/tell " + playerName + " "));
 	}
 
 	public void registerPermission(String permissionKey, Predicate<Player> playerPredicate) {

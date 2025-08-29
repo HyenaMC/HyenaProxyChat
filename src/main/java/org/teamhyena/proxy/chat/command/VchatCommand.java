@@ -14,6 +14,7 @@ import com.velocitypowered.api.proxy.ServerConnection;
 import fun.qu_an.lib.mc.util.FormatUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.slf4j.Logger;
 import org.teamhyena.proxy.chat.HyenaProxyChatPlugin;
 import org.teamhyena.proxy.chat.text.Translates;
@@ -122,7 +123,9 @@ public class VchatCommand {
 		if (source instanceof Player player) {
 			Utils.sendGlobalPlayerChat(player, message);
 		} else if (source instanceof ConsoleCommandSource) {
-			Utils.sendToAllPlayers(Component.text("§4[Proxy] §r").append(Component.text(message)));
+			Component prefix = Component.text("[Proxy] ", NamedTextColor.DARK_RED);
+			Component content = LegacyComponentSerializer.legacySection().deserialize(message);
+			Utils.sendToAllPlayers(prefix.append(content));
 		}
 		return 1;
 	}
@@ -136,12 +139,10 @@ public class VchatCommand {
 		context.getSource().sendMessage(Translates.HELP
 			.append(Component.newline())
 			.append(Translates.DASH_AND_SPACE)
-			.append(Translates.HELP_BROADCAST
-				.args(Component.text(CONFIG.getCommandBroadcastAlias())))
+			.append(Component.translatable(Translates.HELP_BROADCAST.key(), Component.text(CONFIG.getCommandBroadcastAlias())))
 			.append(Component.newline())
 			.append(Translates.DASH_AND_SPACE)
-			.append(Translates.HELP_LOCAL
-				.args(Component.text(CONFIG.getCommandLocalAlias()))));
+			.append(Component.translatable(Translates.HELP_LOCAL.key(), Component.text(CONFIG.getCommandLocalAlias()))));
 		return 1;
 	}
 }

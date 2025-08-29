@@ -56,8 +56,9 @@ public class CommandExecuteListener {
 				.map(RegisteredServer::getServerInfo)
 				.map(ServerInfo::getName).orElse(null);
 			if (currentServer != null) {
-				sourcePlayer.sendMessage(Translates.COMMAND_SERVER_CURRENT
-					.args(ComponentUtils.getServerComponent(currentServer, 0, serverName)));
+				sourcePlayer.sendMessage(Component.translatable(
+					Translates.COMMAND_SERVER_CURRENT.key(),
+					ComponentUtils.getServerComponent(currentServer, 0, serverName)));
 			}
 			Collection<RegisteredServer> allServers = proxyServer.getAllServers();
 			if (allServers.size() > 50) {
@@ -67,8 +68,9 @@ public class CommandExecuteListener {
 			List<Component> servers = allServers.stream()
 				.map(server -> ComponentUtils.getServerComponent(server, 0, serverName))
 				.toList();
-			sourcePlayer.sendMessage(Translates.COMMAND_SERVER_AVAILABLE
-				.args(Component.join(COMMA_AND_SPACE, servers)));
+			sourcePlayer.sendMessage(Component.translatable(
+				Translates.COMMAND_SERVER_AVAILABLE.key(),
+				Component.join(COMMA_AND_SPACE, servers)));
 			return;
 		}
 
@@ -132,9 +134,8 @@ public class CommandExecuteListener {
 	private void sendTotalProxyCount(Player target) {
 		final int online = proxyServer.getPlayerCount();
 		target.sendMessage((online == 1
-			? Translates.GLIST_PLAYER_COUNT_SINGULAR
-			: Translates.GLIST_PLAYER_COUNT_PLURAL)
-			.args(Component.text(online, NamedTextColor.GREEN)));
+			? Component.translatable(Translates.GLIST_PLAYER_COUNT_SINGULAR.key(), Component.text(online, NamedTextColor.GREEN))
+			: Component.translatable(Translates.GLIST_PLAYER_COUNT_PLURAL.key(), Component.text(online, NamedTextColor.GREEN))));
 	}
 
 	private void sendServerPlayers(final Player target,
@@ -145,7 +146,8 @@ public class CommandExecuteListener {
 			.toList();
 		Component players = Component.join(COMMA_AND_SPACE, components);
 		if (!players.children().isEmpty() || force) {
-			target.sendMessage(Translates.GLIST_ENTRY.args(
+			target.sendMessage(Component.translatable(
+				Translates.GLIST_ENTRY.key(),
 				ComponentUtils.getServerComponent(server),
 				Component.text(playersConnected.size(), NamedTextColor.GREEN),
 				players));

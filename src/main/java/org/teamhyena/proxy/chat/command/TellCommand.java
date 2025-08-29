@@ -11,6 +11,7 @@ import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ServerConnection;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.teamhyena.proxy.chat.text.Translates;
 import org.teamhyena.proxy.chat.util.ComponentUtils;
 
@@ -63,15 +64,17 @@ public class TellCommand {
 				.orElse(Translates.SERVER_NOT_FOUND_NAME);
 			String msg = context.getArgument("msg", String.class);
 			TextComponent tellMessage = Component.text(msg);
-			targetPlayer.sendMessage(Translates.TELL_MESSAGE.args(
+			targetPlayer.sendMessage(Component.translatable(
+				Translates.TELL_MESSAGE.key(),
 				source instanceof Player player ? ComponentUtils.getPlayerComponent(player)
-					: Component.text("§4[Proxy]§r"),
+					: Component.text("[Proxy]", NamedTextColor.DARK_RED),
 				tellMessage,
 				sourceServerComponent,
 				targetServerComponent
 			));
 			// 发送反馈
-			source.sendMessage(Translates.TELL_RESPONSE.args(
+			source.sendMessage(Component.translatable(
+				Translates.TELL_RESPONSE.key(),
 				ComponentUtils.getPlayerComponent(targetPlayer),
 				tellMessage,
 				sourceServerComponent,
